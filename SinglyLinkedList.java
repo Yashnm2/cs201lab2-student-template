@@ -100,10 +100,18 @@ public class SinglyLinkedList<E extends Comparable<E>> {
     }
 
     // write your codes here
-    public void swap(){
-        
-
+    public E flipNextAll(Node<E> n, Node<E> prev) {
+        if (n==null){
+            return prev;
+        }
+        Node<E> next = n.getNext();
+        n.setNext(prev);
+        return flipNextAll(next, n);
     }
-   
+    public void swap(){
+        Node<E> h = head;
+        head = flipNextAll(head, null);
+        tail = h;
+    }
 }
 
