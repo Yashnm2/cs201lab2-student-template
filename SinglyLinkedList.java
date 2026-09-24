@@ -100,7 +100,7 @@ public class SinglyLinkedList<E extends Comparable<E>> {
     }
 
     // write your codes here
-    public E flipNextAll(Node<E> n, Node<E> prev) {
+    public Node<E> flipNextAll(Node<E> n, Node<E> prev) {
         if (n==null){
             return prev;
         }
