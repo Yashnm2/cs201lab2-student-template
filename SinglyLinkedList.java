@@ -100,18 +100,39 @@ public class SinglyLinkedList<E extends Comparable<E>> {
     }
 
     // write your codes here
-    public Node<E> flipNextAll(Node<E> n, Node<E> prev) {
-        if (n==null){
-            return prev;
+    public void swap() {
+        if (size < 2) {
+            return;
         }
-        Node<E> next = n.getNext();
-        n.setNext(prev);
-        return flipNextAll(next, n);
-    }
-    public void swap(){
-        Node<E> h = head;
-        head = flipNextAll(head, null);
-        tail = h;
+
+        ArrayList<Node<E>> list = new ArrayList<>();
+        TreeMap<E, Integer> map = new TreeMap<>();
+
+        Node<E> cur = head;
+        int i = 0;
+
+        while (cur != null) {
+            list.add(cur);
+            map.put(cur.getElement(), i);
+            cur = cur.getNext();
+            i++;
+        }
+
+        while (map.size() > 1) {
+            int a = map.pollFirstEntry().getValue();
+            int b = map.pollLastEntry().getValue();
+
+            Collections.swap(list, a, b);
+        }
+
+        head = list.get(0);
+
+        for (i = 0; i < size - 1; i++) {
+            list.get(i).setNext(list.get(i + 1));
+        }
+
+        tail = list.get(size - 1);
+        tail.setNext(null);
     }
 }
 //just a line to "commit"
